@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#if [ -f ${HOME}/.ssh/gen_config.sh ]; then
+#	${HOME}/.ssh/gen_config.sh >/dev/null
+#fi
+
+gen-ssh-config >/dev/null
+
+/usr/bin/$(basename ${0}) "$@"

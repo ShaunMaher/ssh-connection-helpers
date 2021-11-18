@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+INUSE=1
+PORT=$(( $(( $RANDOM + 1024)) % 65535 ))
+while [ $INUSE -gt 0 ]; do
+	INUSE=$( \
+		netstat -ant | \
+	        grep '^tcp ' | \
+	        grep LISTEN | \
+	        grep -e '0\.0\.0\.0' -e '127\.0\.0\.1' | \
+	        awk '{print $4}' | awk 'BEGIN{FS=":"}{print $2}' | \
+		grep -c "^${PORT}\$"
+	)	
+done
+echo ${PORT}
